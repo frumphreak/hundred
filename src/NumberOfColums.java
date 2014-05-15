@@ -1,18 +1,9 @@
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JSlider;
-import javax.swing.border.Border;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class NumberOfColums extends JFrame implements ChangeListener,
         ActionListener {
@@ -24,6 +15,8 @@ public class NumberOfColums extends JFrame implements ChangeListener,
     private JButton beginGame = new JButton("ПУСТЬ НАЧНЕТСЯ БИТВА");
     private JLabel textNumberOfColumnFromSlider = new JLabel("You choose : 17",
             JLabel.CENTER);
+    private JLabel nameOfHuman = new JLabel("Введіть ім'я людини");
+    private JTextField tfNameOfHuman = new JTextField();
 
     NumberOfColums() {
         super("Вибір");
@@ -45,11 +38,12 @@ public class NumberOfColums extends JFrame implements ChangeListener,
     }
 
     private void addWindowsComponent() {
-        setLayout(new GridLayout(3, 1));
+        setLayout(new GridLayout(5, 1));
         add(sliderCountColums);
         add(textNumberOfColumnFromSlider);
         add(beginGame);
-
+        add(nameOfHuman);
+        add(tfNameOfHuman);
         beginGame.addActionListener(this);
     }
 
@@ -74,12 +68,22 @@ public class NumberOfColums extends JFrame implements ChangeListener,
 
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == beginGame) {
-            GameFieldWindow.numberOfColums = (short) sliderCountColums.getValue();
 
-            // Створення основго вікна. (Main працює 1 раз).
-            GameFieldWindow windFuck = new GameFieldWindow();
-            windFuck.workWithMainWindow(windFuck);
-            NumberOfColums.colums.dispose();// Закриття діалогу
+           //Шикарний іф
+           //Якщо поле пусте, то не пускати до гри
+           if (tfNameOfHuman.getText().equals("")){
+               System.out.println("NULL");
+               JOptionPane.showMessageDialog(null, "Введіть ім'я люидин!", "Попередження",
+                       JOptionPane.WARNING_MESSAGE);
+           }
+           else{
+               GameFieldWindow.numberOfColums = (short) sliderCountColums.getValue();
+
+               // Створення основго вікна. (Main працює 1 раз).
+               GameFieldWindow windFuck = new GameFieldWindow();
+               windFuck.workWithMainWindow(windFuck);
+               NumberOfColums.colums.dispose();// Закриття діалогу
+           }
         }
     }
 
