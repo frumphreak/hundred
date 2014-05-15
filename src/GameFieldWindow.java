@@ -1,21 +1,18 @@
 //Кількість цифр 181!
 
-import java.awt.GridLayout;
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.border.Border;
-
 class GameFieldWindow extends JFrame implements ActionListener {
 
 
     static int razmerMassiva = 181;
-    static short numberOfColums = 15, numberOfRows = 0;// Налаштування таблиці
+    static short numberOfColums = 15;// Налаштування таблиці
     // кнопок
     static JButton[] arrayButton = new JButton[razmerMassiva];// Визначенний
     // масив кнопок
@@ -39,12 +36,9 @@ class GameFieldWindow extends JFrame implements ActionListener {
         addWindowListener(new WindowAdapt());
     }
 
+
     // Обробка натискання клавіш
     public void actionPerformed(ActionEvent actionEvent) {
-        // Красота. Кнопка втиснута.
-        Border loweredBorder = BorderFactory.createLoweredBevelBorder();
-        // Кнопка витиснута
-        Border raisedbevel = BorderFactory.createRaisedBevelBorder();
 
         // Обробка 181 кнопки
         int countButton = 0;
@@ -70,7 +64,7 @@ class GameFieldWindow extends JFrame implements ActionListener {
                     prevIndexI = (int) i / numberOfColums;
                     prevIndexJ = (int) i % numberOfColums;
                     previousI = prevIndexI * numberOfColums + prevIndexJ;
-                    arrayButton[i].setBorder(loweredBorder);
+                    arrayButton[i].hide();
                     button1 = i;
                 }
                 if (countButton == 1) {
@@ -157,6 +151,8 @@ class GameFieldWindow extends JFrame implements ActionListener {
 				 */
 
                 if (zakreslennya == true) {
+                    arrayButton[i].show();
+                    arrayButton[previousI].show();
                     arrayButton[i].setVisible(false);// i=173,indexI=17,IndexJ=3.
                     // 17*10+3==173//IndexI*numberOfColums+IndexJ
                     arrayButton[previousI].setVisible(false);// prevIndexI*numberOfColums+prevIndexJ
@@ -168,8 +164,10 @@ class GameFieldWindow extends JFrame implements ActionListener {
                 }
 
                 if ((zakreslennya == false) && (countButton == 1)) {
-                    arrayButton[previousI].setBorder(raisedbevel);
-                    arrayButton[i].setBorder(raisedbevel);
+                    arrayButton[previousI].show();
+                    arrayButton[i].show();
+                    arrayButton[previousI].setVisible(true);
+                    arrayButton[i].setVisible(true);
                 }
                 // JOptionPane.showMessageDialog(null,msg);
             }
