@@ -48,6 +48,8 @@ class GameFieldWindow extends JFrame implements ActionListener {
         // i and j
         boolean knopkyNajali = false;
         String msg;
+
+        // Обробка натискання клавіш вікна
         for (int i = 0; i < razmerMassiva; i++) {
             if (actionEvent.getSource() == arrayButton[i]) {
                 jobCountNajatiy++;
@@ -68,8 +70,6 @@ class GameFieldWindow extends JFrame implements ActionListener {
                     button1 = i;
                 }
                 if (countButton == 1) {
-                    IndexI = (int) i / numberOfColums;
-                    IndexJ = (int) i % numberOfColums;
                     button2 = i;
                     IndexDiff = button2 - button1;
                     if (IndexDiff < 0) {
@@ -142,13 +142,6 @@ class GameFieldWindow extends JFrame implements ActionListener {
                 }
 
                 msg = Integer.toString(i);
-                // arrayButton[i].hide();// Vitaly:Необхідно замінити даний
-                // метод
-				/*
-				 * Sanya: Заміняти не треба.Цей метод затемняє кнопку, будемо
-				 * використовувати, коли одну вже натиснули, а другу ще ні. А
-				 * отже невідомо - чи сховати їх обидві чи просто відмінити дію.
-				 */
 
                 if (zakreslennya == true) {
                     arrayButton[i].show();
@@ -158,9 +151,6 @@ class GameFieldWindow extends JFrame implements ActionListener {
                     arrayButton[previousI].setVisible(false);// prevIndexI*numberOfColums+prevIndexJ
                     nArr[i] = 0;
                     nArr[previousI] = 0;
-                    // ButtonsRemover(windFuck,kolichestvo);
-                    // windFuck.repaint();
-                    // ButtonsPainer(windFuck,kolichestvo);
                 }
 
                 if ((zakreslennya == false) && (countButton == 1)) {
@@ -169,7 +159,6 @@ class GameFieldWindow extends JFrame implements ActionListener {
                     arrayButton[previousI].setVisible(true);
                     arrayButton[i].setVisible(true);
                 }
-                // JOptionPane.showMessageDialog(null,msg);
             }
 
             if (knopkyNajali == true) {
@@ -177,6 +166,7 @@ class GameFieldWindow extends JFrame implements ActionListener {
             }
         }
     }
+
 
     boolean Sravnenie() {
         if (nArr[button1] == nArr[button2]) {
@@ -188,31 +178,14 @@ class GameFieldWindow extends JFrame implements ActionListener {
             return false;
     }
 
-    static void CreateNumericArray() {
-        int arrayCounter = 0;
-        // Проганяємо всі числа від 1 до 100;
-        for (int numbers = 1; numbers < 101; numbers++) {// numbers < 101
-            // Старша цифра числа
-            if ((numbers > 9) && (numbers != 100)) {
-                nArr[arrayCounter] = numbers / 10;
-                arrayCounter++;// Наступна комірка при кожному записі
-            }
-            // Молодша фицра числа
-            if (numbers % 10 != 0) {
-                nArr[arrayCounter] = numbers % 10;
-                arrayCounter++;// Наступна комірка при кожному записі
-            }
-            // Визначення числа 100
-            if (numbers == 100) {
-                nArr[arrayCounter] = 1;
-            }
-        }
-    }
 
-    static void ButtonsPainter(GameFieldWindow obj, int kilkist) {
+
+    static void ButtonsPainter(GameFieldWindow obj,int razmerMassiva) {
+        LogicMainWindow lmw = new LogicMainWindow();
+        lmw.CreateArrayOfButtons(razmerMassiva,arrayButton,nArr);
+
         // Кнопка витиснута
         Border raisedbevel = BorderFactory.createRaisedBevelBorder();
-        razmerMassiva = kilkist;
         for (int i = 0; i < razmerMassiva; i++) {// i<181
             obj.add(arrayButton[i]);
             arrayButton[i].setBorder(raisedbevel);
@@ -221,21 +194,9 @@ class GameFieldWindow extends JFrame implements ActionListener {
         }
     }
 
-    static void ButtonsRemover(GameFieldWindow obj, int kilkist) {
-        razmerMassiva = kilkist;
-        for (int i = 0; i < razmerMassiva; i++) {// i<181
-            obj.removeAll();// (arrayButton[i]);
-            arrayButton[i].removeActionListener(obj); // Запис кожнї кнопки до
-            // ActionListener
-        }
-    }
 
-    static void CreateArrayOfButtons() {
-        for (int i = 0; i < razmerMassiva; i++) {
-            JButton button = new JButton("" + nArr[i]);
-            arrayButton[i] = button;
-        }
-    }
+
+
 
     void workWithMainWindow(GameFieldWindow obj) { // Налаштування вікна
         // windFuck.setBounds(10, 10, 1350, 300);
