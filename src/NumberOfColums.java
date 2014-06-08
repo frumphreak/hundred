@@ -12,11 +12,15 @@ public class NumberOfColums extends JFrame implements ChangeListener,
     private JSlider sliderCountColums = new JSlider(5, 30); // Значення, які ми
     // будемо в змозі
     // вибрати
-    private JButton beginGame = new JButton("ПУСТЬ НАЧНЕТСЯ БИТВА");
-    private JLabel textNumberOfColumnFromSlider = new JLabel("You choose : 17",
+    private JLabel textNumberOfColumnFromSlider = new JLabel("You choose : 17 колонок",
             JLabel.CENTER);
-    private JLabel nameOfHuman = new JLabel("Введіть ім'я людини");
+    private JLabel labelColums = new JLabel ("Кількість колонок",JLabel.CENTER);
+    private JLabel nameOfHuman = new JLabel("Введіть ім'я людини",JLabel.CENTER);
     private JTextField tfNameOfHuman = new JTextField();
+    private JButton firstVariant=new JButton("Неможливо через закреслене");
+    private JButton secondVariant=new JButton("Можливо через закреслене");
+
+    private JPanel variantsOfgame=new JPanel();
 
     NumberOfColums() {
         super("Вибір");
@@ -38,13 +42,19 @@ public class NumberOfColums extends JFrame implements ChangeListener,
     }
 
     private void addWindowsComponent() {
-        setLayout(new GridLayout(5, 1));
+        setLayout(new GridLayout(6, 1));
+        add(labelColums);
         add(sliderCountColums);
         add(textNumberOfColumnFromSlider);
-        add(beginGame);
         add(nameOfHuman);
         add(tfNameOfHuman);
-        beginGame.addActionListener(this);
+        add(variantsOfgame);
+
+        variantsOfgame.setLayout(new GridLayout(1, 2));
+        variantsOfgame.add(firstVariant);
+        variantsOfgame.add(secondVariant);
+
+        secondVariant.addActionListener(this);
     }
 
 
@@ -67,7 +77,10 @@ public class NumberOfColums extends JFrame implements ChangeListener,
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == beginGame) {
+        if (actionEvent.getSource() == firstVariant) {
+
+        }
+        if (actionEvent.getSource() == secondVariant) {
 
            //Шикарний іф
            //Якщо поле пусте, то не пускати до гри
@@ -89,6 +102,6 @@ public class NumberOfColums extends JFrame implements ChangeListener,
 
     public void stateChanged(ChangeEvent e) { // Відстежування зміни слайдера
         textNumberOfColumnFromSlider.setText("You choose :"
-                + ((JSlider) (e.getSource())).getValue());
+                + ((JSlider) (e.getSource())).getValue()+" колонок");
     }
 }
