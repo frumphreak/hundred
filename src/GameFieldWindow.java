@@ -9,6 +9,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 class GameFieldWindow extends JFrame implements ActionListener {
+
+    private JPanel additionalMenu= new JPanel();
+    private JPanel gameField= new JPanel();
+    private JButton newDistribution= new JButton("SHIT");
+
     static short numberOfColums = 15;// Налаштування таблиці
     // кнопок
 
@@ -29,17 +34,23 @@ class GameFieldWindow extends JFrame implements ActionListener {
         // Кнопка витиснута
         Border raisedbevel = BorderFactory.createRaisedBevelBorder();
         for (int i = 0; i < razmerMassiva-lmw.numberOfZeroInArray; i++) {// i<181
-            obj.add(arrayButton[i]);
+            gameField.add(arrayButton[i]);
             arrayButton[i].setBorder(raisedbevel);
             arrayButton[i].addActionListener(obj); // Запис кожнї кнопки до
             // ActionListener
         }
+
+        additionalMenu.add(newDistribution);
+
     }
 
     void workWithMainWindow(GameFieldWindow obj) { // Налаштування вікна
         // windFuck.setBounds(10, 10, 1350, 300);
         obj.setExtendedState(MAXIMIZED_BOTH);
-        obj.setLayout(new GridLayout(0, numberOfColums));// Розмітка
+        obj.setLayout(new GridLayout(2, 1));// Розмітка вікна
+        obj.add(gameField);
+        obj.add(additionalMenu);
+        gameField.setLayout(new GridLayout(0, numberOfColums));// Розмітка панелі
         // сторінки.
         ButtonsPainter(obj, LogicMainWindow.RAZMERMASIVA+LogicMainWindow.FORDATE);
         obj.setVisible(true);
