@@ -1,23 +1,34 @@
 import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class LogicMainWindow {
+    static final int RAZMERMASIVA = 181;
+    static final int FORDATE=8;
+
+    int numberOfZeroInArray=0;
     int firstNumber=0,secondNumber=0;
     int click;
     int bigger,smaller;
-    int[] nArr=new int[181];
+    int[] nArr=new int[RAZMERMASIVA+FORDATE];
 
 
     void createArrayOfButtons(int lenghtArray, JButton[] array) {
         createNumericArray(nArr);
 
         for (int i = 0; i < lenghtArray; i++) {
-            JButton button = new JButton("" +  nArr[i]);
-            array[i] = button;
+            if (nArr[i]!=0){
+                JButton button = new JButton("" +  nArr[i]);
+                array[i] = button;
+            }
+            else{
+                numberOfZeroInArray++;
+            }
         }
     }
 
     private void createNumericArray(int[] numericalArray) {
-
         int arrayCounter = 0;
         // Проганяємо всі числа від 1 до 100;
         for (int numbers = 1; numbers < 101; numbers++) {// numbers < 101
@@ -36,6 +47,17 @@ public class LogicMainWindow {
                 numericalArray[arrayCounter] = 1;
             }
         }
+
+        String date = getDate();
+
+        for (int i=0;i<date.length();i++){
+            nArr[RAZMERMASIVA+i]=Character.getNumericValue(date.charAt(i));;
+        }
+
+        for (int i=0;i<nArr.length;i++){
+            System.out.println(nArr[i]);
+        }
+
     }
 
     void disappear(JButton [] arrayButton, int iterator, int numberOfColums){
@@ -146,5 +168,13 @@ public class LogicMainWindow {
             bigger=second;
             smaller=first;
         }
+    }
+
+    String getDate(){
+        Calendar cal = new GregorianCalendar();
+        String date = new SimpleDateFormat("ddMMyyyy").format(cal.getTime());
+        // Избавление от 0
+        date=date.replaceAll("0","");
+        return date;
     }
 }

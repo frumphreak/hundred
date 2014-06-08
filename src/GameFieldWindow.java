@@ -9,12 +9,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 class GameFieldWindow extends JFrame implements ActionListener {
-
-
-    static int razmerMassiva = 181;
     static short numberOfColums = 15;// Налаштування таблиці
     // кнопок
-    static JButton[] arrayButton = new JButton[razmerMassiva];// Визначенний
+
+    static JButton[] arrayButton =
+            new JButton [LogicMainWindow.RAZMERMASIVA+LogicMainWindow.FORDATE];// Визначенний
     // масив кнопок
 
     public GameFieldWindow() {
@@ -29,7 +28,7 @@ class GameFieldWindow extends JFrame implements ActionListener {
 
         // Кнопка витиснута
         Border raisedbevel = BorderFactory.createRaisedBevelBorder();
-        for (int i = 0; i < razmerMassiva; i++) {// i<181
+        for (int i = 0; i < razmerMassiva-lmw.numberOfZeroInArray; i++) {// i<181
             obj.add(arrayButton[i]);
             arrayButton[i].setBorder(raisedbevel);
             arrayButton[i].addActionListener(obj); // Запис кожнї кнопки до
@@ -42,7 +41,7 @@ class GameFieldWindow extends JFrame implements ActionListener {
         obj.setExtendedState(MAXIMIZED_BOTH);
         obj.setLayout(new GridLayout(0, numberOfColums));// Розмітка
         // сторінки.
-        ButtonsPainter(obj, razmerMassiva);
+        ButtonsPainter(obj, LogicMainWindow.RAZMERMASIVA+LogicMainWindow.FORDATE);
         obj.setVisible(true);
     }
 
@@ -50,7 +49,7 @@ class GameFieldWindow extends JFrame implements ActionListener {
     // Обробка натискання клавіш
     public void actionPerformed(ActionEvent actionEvent) {
         // Обробка натискання клавіш вікна
-        for (int i = 0; i < razmerMassiva; i++) {
+        for (int i = 0; i < LogicMainWindow.RAZMERMASIVA; i++) {
             if (actionEvent.getSource() == arrayButton[i]) {
                 LogicMainWindow lmw = new LogicMainWindow();
                 lmw.disappear(arrayButton, i, numberOfColums);
@@ -58,7 +57,6 @@ class GameFieldWindow extends JFrame implements ActionListener {
         }
     }
 }
-
 
 
 class WindowAdapt extends WindowAdapter {
