@@ -9,10 +9,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 class GameFieldWindow extends JFrame implements ActionListener {
+    // криво, фу
+    LogicMainWindow lmw = new LogicMainWindow();
 
-    private JPanel additionalMenu= new JPanel();
-    private JPanel gameField= new JPanel();
-    private JButton newDistribution= new JButton("SHIT");
 
     static short numberOfColums = 15;// Налаштування таблиці
     // кнопок
@@ -28,29 +27,22 @@ class GameFieldWindow extends JFrame implements ActionListener {
 
 
     void ButtonsPainter(GameFieldWindow obj,int razmerMassiva) {
-        LogicMainWindow lmw = new LogicMainWindow();
         lmw.createArrayOfButtons(razmerMassiva,arrayButton);
 
         // Кнопка витиснута
         Border raisedbevel = BorderFactory.createRaisedBevelBorder();
         for (int i = 0; i < razmerMassiva-lmw.numberOfZeroInArray; i++) {// i<181
-            gameField.add(arrayButton[i]);
+            obj.add(arrayButton[i]);
             arrayButton[i].setBorder(raisedbevel);
             arrayButton[i].addActionListener(obj); // Запис кожнї кнопки до
             // ActionListener
         }
-
-        additionalMenu.add(newDistribution);
-
     }
 
     void workWithMainWindow(GameFieldWindow obj) { // Налаштування вікна
         // windFuck.setBounds(10, 10, 1350, 300);
         obj.setExtendedState(MAXIMIZED_BOTH);
-        obj.setLayout(new GridLayout(2, 1));// Розмітка вікна
-        obj.add(gameField);
-        obj.add(additionalMenu);
-        gameField.setLayout(new GridLayout(0, numberOfColums));// Розмітка панелі
+        obj.setLayout(new GridLayout(0, numberOfColums));// Розмітка
         // сторінки.
         ButtonsPainter(obj, LogicMainWindow.RAZMERMASIVA+LogicMainWindow.FORDATE);
         obj.setVisible(true);
@@ -62,7 +54,6 @@ class GameFieldWindow extends JFrame implements ActionListener {
         // Обробка натискання клавіш вікна
         for (int i = 0; i < LogicMainWindow.RAZMERMASIVA; i++) {
             if (actionEvent.getSource() == arrayButton[i]) {
-                LogicMainWindow lmw = new LogicMainWindow();
                 lmw.disappear(arrayButton, i, numberOfColums);
             }
         }
