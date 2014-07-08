@@ -40,12 +40,14 @@ class GameFieldWindow extends JFrame implements ActionListener {
     }
 
     void workWithMainWindow(GameFieldWindow obj) { // Налаштування вікна
-        // windFuck.setBounds(10, 10, 1350, 300);
-        obj.setExtendedState(MAXIMIZED_BOTH);
-        obj.setLayout(new GridLayout(0, numberOfColums));// Розмітка
-        // сторінки.
+        // дефолтні розміри вікна
+        //obj.setBounds(10, 10, 800, 600);
+        obj.setExtendedState(MAXIMIZED_BOTH);// на весь екран
+        obj.setLayout(new GridLayout(0, numberOfColums));// Розмітка сторінки.
         ButtonsPainter(obj, LogicMainWindow.RAZMERMASIVA+LogicMainWindow.FORDATE);
         obj.setVisible(true);
+        obj.setResizable(false);// якщо натиснути кнопку максимізації, то воно стає надто малим
+        // бо не встановлені дефолтні розміри вікна
     }
 
 
