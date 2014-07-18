@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -61,11 +62,14 @@ public class LogicMainWindow {
     }
 
     void disappear(JButton [] arrayButton, int iterator, int numberOfColums){
+        Border raisedbevel = BorderFactory.createRaisedBevelBorder();
+        Border loweredBorder = BorderFactory.createLoweredBevelBorder();
+
         int flagOfZero=0;
 
         click++;
         if (click==1){
-            arrayButton[iterator].hide();
+            arrayButton[iterator].setBorder(loweredBorder);
             firstNumber=iterator;
             System.out.println("First: "+firstNumber);
         }
@@ -81,7 +85,9 @@ public class LogicMainWindow {
                 if (firstNumber/numberOfColums==secondNumber/numberOfColums){
                     // Якщо кнопки один біля одного
                     if(Math.abs(firstNumber-secondNumber)==1){
-                        arrayButton[iterator].hide();
+                        arrayButton[secondNumber].hide();
+                        arrayButton[firstNumber].hide();
+
                         nArr[firstNumber]=0;
                         nArr[secondNumber]=0;
                     }
@@ -99,7 +105,8 @@ public class LogicMainWindow {
                         }
                         //Якщо флаг дорівнює умові, то ховаємо і занудюємо
                         if (flagOfZero==condition-1){
-                            arrayButton[iterator].hide();
+                            arrayButton[secondNumber].hide();
+                            arrayButton[firstNumber].hide();
                             nArr[firstNumber]=0;
                             nArr[secondNumber]=0;
                             flagOfZero=0;
@@ -118,7 +125,8 @@ public class LogicMainWindow {
                 else if (firstNumber%numberOfColums==secondNumber%numberOfColums){
                     // Якщо поруч знаходяться значення по вертикалі
                     if (Math.abs(firstNumber-secondNumber)==numberOfColums){
-                        arrayButton[iterator].hide();
+                        arrayButton[secondNumber].hide();
+                        arrayButton[firstNumber].hide();
                         nArr[firstNumber]=0;
                         nArr[secondNumber]=0;
                     }
@@ -138,22 +146,23 @@ public class LogicMainWindow {
                         }
                         //Якщо флаг дорівнює умові, то ховаємо і занудюємо
                         if (flagOfZero==condition-1){
-                            arrayButton[iterator].hide();
+                            arrayButton[secondNumber].hide();
+                            arrayButton[firstNumber].hide();
                             nArr[firstNumber]=0;
                             nArr[secondNumber]=0;
                             flagOfZero=0;
                         }
                         else{
-                            arrayButton[firstNumber].show();
+                            arrayButton[firstNumber].setBorder(raisedbevel);
                         }
                     }
                 }
                 else {
-                    arrayButton[firstNumber].show();
+                    arrayButton[firstNumber].setBorder(raisedbevel);
                 }
             }
             else {
-                arrayButton[firstNumber].show();
+                arrayButton[firstNumber].setBorder(raisedbevel);
             }
 
         }
