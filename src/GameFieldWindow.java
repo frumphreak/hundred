@@ -54,7 +54,8 @@ class GameFieldWindow extends JFrame implements ActionListener {
     // Обробка натискання клавіш
     public void actionPerformed(ActionEvent actionEvent) {
         // Обробка натискання клавіш вікна
-        for (int i = 0; i < LogicMainWindow.RAZMERMASIVA; i++) {
+        // Розмір масиву кнопок + розмір на дату
+        for (int i = 0; i < LogicMainWindow.RAZMERMASIVA+LogicMainWindow.FORDATE; i++) {
             if (actionEvent.getSource() == arrayButton[i]) {
                 lmw.disappear(arrayButton, i, numberOfColums);
             }
