@@ -61,7 +61,7 @@ public class LogicMainWindow {
 
     }
 
-    void disappear(JButton [] arrayButton, int iterator, int numberOfColums){
+    void disappear(JButton [] arrayButton, int iterator, int numberOfColums, boolean styleOfGame){
         Border raisedbevel = BorderFactory.createRaisedBevelBorder();
         Border loweredBorder = BorderFactory.createLoweredBevelBorder();
 
@@ -92,7 +92,7 @@ public class LogicMainWindow {
                         nArr[secondNumber]=0;
                     }
                     //Якщо кнопки на відстаі один від одного
-                    else if(Math.abs(firstNumber-secondNumber)!=1){
+                    else if((Math.abs(firstNumber-secondNumber)!=1)&&(styleOfGame==true)){
                         biggerAndSmaller(firstNumber,secondNumber);
                         // Умова завжди більша на 1 від дійсності
                         int condition = bigger-smaller;
@@ -132,25 +132,27 @@ public class LogicMainWindow {
                     }
                     // Коли значення знаходяться по вертикалі на відстані декілької рядків
                     else{
-                        biggerAndSmaller(firstNumber,secondNumber);
-                        System.out.println(bigger+" "+smaller);
+                        if(styleOfGame==true){
+                            biggerAndSmaller(firstNumber,secondNumber);
+                            System.out.println(bigger+" "+smaller);
 
-                        // Умова завжди більша на 1 від дійсності
-                        int condition = (bigger-smaller)/numberOfColums;
-                        // условия проверки значений между выбраными клавишами
-                        for (int i=0;i<condition;i++){
-                            if (nArr[smaller+numberOfColums*i]==0){
-                                flagOfZero++;
-                                System.out.println(flagOfZero);
+                            // Умова завжди більша на 1 від дійсності
+                            int condition = (bigger-smaller)/numberOfColums;
+                            // условия проверки значений между выбраными клавишами
+                            for (int i=0;i<condition;i++){
+                                if (nArr[smaller+numberOfColums*i]==0){
+                                    flagOfZero++;
+                                    System.out.println(flagOfZero);
+                                }
                             }
-                        }
-                        //Якщо флаг дорівнює умові, то ховаємо і занудюємо
-                        if (flagOfZero==condition-1){
-                            arrayButton[secondNumber].hide();
-                            arrayButton[firstNumber].hide();
-                            nArr[firstNumber]=0;
-                            nArr[secondNumber]=0;
-                            flagOfZero=0;
+                            //Якщо флаг дорівнює умові, то ховаємо і занудюємо
+                            if (flagOfZero==condition-1){
+                                arrayButton[secondNumber].hide();
+                                arrayButton[firstNumber].hide();
+                                nArr[firstNumber]=0;
+                                nArr[secondNumber]=0;
+                                flagOfZero=0;
+                            }
                         }
                         else{
                             arrayButton[firstNumber].setBorder(raisedbevel);

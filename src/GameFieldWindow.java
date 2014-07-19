@@ -93,12 +93,12 @@ class GameFieldWindow extends JFrame implements ActionListener {
             if (actionEvent.getSource() == arrayButton[i]) {
                 if (crossed){
                     System.out.println(crossed);
-                    lmw.disappear(arrayButton, i, numberOfColums);
+                    lmw.disappear(arrayButton, i, numberOfColums,crossed);
                 }
                 else{
                     System.out.println(crossed);
+                    lmw.disappear(arrayButton, i, numberOfColums,crossed);
                 }
-
             }
         }
 
