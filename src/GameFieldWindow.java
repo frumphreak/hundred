@@ -9,6 +9,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 class GameFieldWindow extends JFrame implements ActionListener {
+    private boolean crossed=false;
+
     // криво, фу
     LogicMainWindow lmw = new LogicMainWindow();
 
@@ -77,6 +79,11 @@ class GameFieldWindow extends JFrame implements ActionListener {
 
     }
 
+    // Дізнатися, яка гра розпочалась.
+    public void setCrossed(boolean crossed){
+        this.crossed=crossed;
+    }
+
 
     // Обробка натискання клавіш
     public void actionPerformed(ActionEvent actionEvent) {
@@ -84,9 +91,18 @@ class GameFieldWindow extends JFrame implements ActionListener {
         // Розмір масиву кнопок + розмір на дату
         for (int i = 0; i < LogicMainWindow.RAZMERMASIVA+LogicMainWindow.FORDATE; i++) {
             if (actionEvent.getSource() == arrayButton[i]) {
-                lmw.disappear(arrayButton, i, numberOfColums);
+                if (crossed){
+                    System.out.println(crossed);
+                    lmw.disappear(arrayButton, i, numberOfColums);
+                }
+                else{
+                    System.out.println(crossed);
+                }
+
             }
         }
+
+
         if (actionEvent.getSource() == help) {
             System.out.println("help");
         }

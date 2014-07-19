@@ -54,6 +54,7 @@ public class NumberOfColums extends JFrame implements ChangeListener,
         variantsOfgame.add(firstVariant);
         variantsOfgame.add(secondVariant);
 
+        firstVariant.addActionListener(this);
         secondVariant.addActionListener(this);
     }
 
@@ -77,26 +78,28 @@ public class NumberOfColums extends JFrame implements ChangeListener,
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == firstVariant) {
-
+        //Шикарний іф
+        //Якщо поле пусте, то не пускати до гри
+        if (tfNameOfHuman.getText().equals("")){
+            System.out.println("NULL");
+            JOptionPane.showMessageDialog(null, "Введіть ім'я люидин!", "Попередження",
+                    JOptionPane.WARNING_MESSAGE);
         }
-        if (actionEvent.getSource() == secondVariant) {
+        else{
+            GameFieldWindow.numberOfColums = (short) sliderCountColums.getValue();
+            // Створення основго вікна. (Main працює 1 раз).
+            GameFieldWindow windFuck = new GameFieldWindow();
+            windFuck.workWithMainWindow(windFuck);
 
-           //Шикарний іф
-           //Якщо поле пусте, то не пускати до гри
-           if (tfNameOfHuman.getText().equals("")){
-               System.out.println("NULL");
-               JOptionPane.showMessageDialog(null, "Введіть ім'я люидин!", "Попередження",
-                       JOptionPane.WARNING_MESSAGE);
-           }
-           else{
-               GameFieldWindow.numberOfColums = (short) sliderCountColums.getValue();
+            if (actionEvent.getSource() == firstVariant) {
+                windFuck.setCrossed(false);
+                NumberOfColums.colums.dispose();// Закриття діалогу
+            }
 
-               // Створення основго вікна. (Main працює 1 раз).
-               GameFieldWindow windFuck = new GameFieldWindow();
-               windFuck.workWithMainWindow(windFuck);
-               NumberOfColums.colums.dispose();// Закриття діалогу
-           }
+            if (actionEvent.getSource() == secondVariant) {
+                windFuck.setCrossed(true);
+                NumberOfColums.colums.dispose();// Закриття діалогу
+            }
         }
     }
 
