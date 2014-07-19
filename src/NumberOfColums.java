@@ -90,10 +90,13 @@ public class NumberOfColums extends JFrame implements ChangeListener,
             // Створення основго вікна. (Main працює 1 раз).
             GameFieldWindow windFuck = new GameFieldWindow();
             windFuck.workWithMainWindow(windFuck);
+            System.out.println("lenght "+tfNameOfHuman.getText().length());
+            windFuck.setCountOfLetters(tfNameOfHuman.getText().length());
 
             if (actionEvent.getSource() == firstVariant) {
                 windFuck.setCrossed(false);
                 NumberOfColums.colums.dispose();// Закриття діалогу
+
             }
 
             if (actionEvent.getSource() == secondVariant) {

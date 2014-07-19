@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 
 class GameFieldWindow extends JFrame implements ActionListener {
     private boolean crossed=false;
+    private int countOfLetters;
 
     // криво, фу
     LogicMainWindow lmw = new LogicMainWindow();
@@ -82,6 +83,10 @@ class GameFieldWindow extends JFrame implements ActionListener {
     // Дізнатися, яка гра розпочалась.
     public void setCrossed(boolean crossed){
         this.crossed=crossed;
+    }
+
+    public void setCountOfLetters(int countOfLetters){
+        this.countOfLetters=countOfLetters;
     }
 
 
