@@ -9,7 +9,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 class GameFieldWindow extends JFrame implements ActionListener {
+    // Тип гри (через закреслене можна або ні)
     private boolean crossed=false;
+    // Кількість букв у слові людини на яку гадаютьі
     private int countOfLetters;
 
     // криво, фу
@@ -84,7 +86,7 @@ class GameFieldWindow extends JFrame implements ActionListener {
     public void setCrossed(boolean crossed){
         this.crossed=crossed;
     }
-
+    //Отримання довжини імені обраної особи
     public void setCountOfLetters(int countOfLetters){
         this.countOfLetters=countOfLetters;
     }
@@ -107,7 +109,6 @@ class GameFieldWindow extends JFrame implements ActionListener {
             }
         }
 
-
         if (actionEvent.getSource() == help) {
             System.out.println("help");
         }
@@ -117,6 +118,11 @@ class GameFieldWindow extends JFrame implements ActionListener {
         }
 
         if (actionEvent.getSource() == newDistribution) {
+            for (int i = 0; i < LogicMainWindow.RAZMERMASIVA+LogicMainWindow.FORDATE-lmw.numberOfZeroInArray; i++) {
+                first.remove(arrayButton[i]);
+            }
+            revalidate();
+            repaint();
             System.out.println("newDistribution");
         }
 
