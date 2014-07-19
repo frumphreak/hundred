@@ -112,11 +112,11 @@ public class LogicMainWindow {
                             flagOfZero=0;
                         }
                         else{
-                            arrayButton[firstNumber].show();
+                            arrayButton[firstNumber].setBorder(raisedbevel);
                         }
                     }
                     else {
-                        arrayButton[firstNumber].show();
+                        arrayButton[firstNumber].setBorder(raisedbevel);
                     }
                 }
 
