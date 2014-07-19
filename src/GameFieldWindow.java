@@ -12,6 +12,16 @@ class GameFieldWindow extends JFrame implements ActionListener {
     // криво, фу
     LogicMainWindow lmw = new LogicMainWindow();
 
+    JPanel mainPanel = new JPanel();
+    JPanel first = new JPanel();
+    JPanel second = new JPanel();
+
+    JButton help= new JButton("Можливі варіанти");
+    JButton newDistribution= new JButton ("Оновлення");
+    JButton result= new JButton ("Вивести результат");
+
+
+
 
     static short numberOfColums = 15;// Налаштування таблиці
     // кнопок
@@ -32,7 +42,7 @@ class GameFieldWindow extends JFrame implements ActionListener {
         // Кнопка витиснута
         Border raisedbevel = BorderFactory.createRaisedBevelBorder();
         for (int i = 0; i < razmerMassiva-lmw.numberOfZeroInArray; i++) {// i<181
-            obj.add(arrayButton[i]);
+            first.add(arrayButton[i]);
             arrayButton[i].setBorder(raisedbevel);
             arrayButton[i].addActionListener(obj); // Запис кожнї кнопки до
             // ActionListener
@@ -42,12 +52,29 @@ class GameFieldWindow extends JFrame implements ActionListener {
     void workWithMainWindow(GameFieldWindow obj) { // Налаштування вікна
         // дефолтні розміри вікна
         //obj.setBounds(10, 10, 800, 600);
+        obj.add(mainPanel);
+        mainPanel.setLayout(new GridLayout(2, 1));
+        mainPanel.add(first);
+        mainPanel.add(second);
+
         obj.setExtendedState(MAXIMIZED_BOTH);// на весь екран
-        obj.setLayout(new GridLayout(0, numberOfColums));// Розмітка сторінки.
+        first.setLayout(new GridLayout(0, numberOfColums));// Розмітка сторінки.
         ButtonsPainter(obj, LogicMainWindow.RAZMERMASIVA+LogicMainWindow.FORDATE);
         obj.setVisible(true);
         obj.setResizable(false);// якщо натиснути кнопку максимізації, то воно стає надто малим
         // бо не встановлені дефолтні розміри вікна
+
+        second.setLayout(new GridLayout(1, 3));
+        second.add(help);
+        second.add(result);
+        second.add(newDistribution);
+
+        help.addActionListener(obj);
+        newDistribution.addActionListener(obj);
+        result.addActionListener(obj);
+        result.setEnabled(false);
+
+
     }
 
 
@@ -60,6 +87,18 @@ class GameFieldWindow extends JFrame implements ActionListener {
                 lmw.disappear(arrayButton, i, numberOfColums);
             }
         }
+        if (actionEvent.getSource() == help) {
+            System.out.println("help");
+        }
+
+        if (actionEvent.getSource() == result) {
+            System.out.println("result");
+        }
+
+        if (actionEvent.getSource() == newDistribution) {
+            System.out.println("newDistribution");
+        }
+
     }
 }
 
